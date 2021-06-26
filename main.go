@@ -7,6 +7,8 @@ import (
 	"os"
 	"runtime"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -44,16 +46,12 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, str)
 }
 
-func handleRequests(port string) {
-	log.Println("Listening on port:", port)
-	http.HandleFunc("/", homePage)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
-}
-
 func main() {
 	port := os.Getenv("TARGET_PORT")
 	if port == "" {
 		port = "8080"
 	}
-	handleRequests(port)
+	r := mux.NewRouter()
+	r.HandleFunc("/", homePage).Methods("GET")
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
