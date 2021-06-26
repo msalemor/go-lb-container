@@ -50,7 +50,7 @@ jobs:
           file: ./Dockerfile
           push: true
           #addLatest: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:$${{env.GITHUB_RUN_ID}}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:${{ github.run_number }},dev
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
