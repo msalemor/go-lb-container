@@ -32,6 +32,13 @@ FROM scratch
 
 COPY --from=builder /dist/main /
 
+ENV TARGET_PORT=8080
+ENV CUSTOM_MESSAGE="This is a custom message"
+
+EXPOSE 8080
+
+USER nobody
+
 # Command to run
 ENTRYPOINT ["/main"]
 
