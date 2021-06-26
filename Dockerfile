@@ -37,9 +37,9 @@ ENV CUSTOM_MESSAGE="This is a custom message"
 
 EXPOSE 8080
 
-RUN groupadd -g 2000 go \
-&& useradd -m -u 2001 -g go go
-USER go
+# RUN groupadd -g 2000 go \
+# && useradd -m -u 2001 -g go go
+USER NOUSER
 
 # Command to run
 ENTRYPOINT ["/main"]
