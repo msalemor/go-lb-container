@@ -25,22 +25,22 @@ RUN go build -o main .
 WORKDIR /dist
 
 # Copy binary from build to main folder
-RUN cp /build/main .
+RUN cp /build/app .
 
 # Build a small image
 FROM scratch
 
-COPY --from=builder /dist/main /
+COPY --from=builder /dist/app /
 
 ENV TARGET_PORT=8080
 ENV CUSTOM_MESSAGE="This is a custom message"
 
 EXPOSE 8080
 
-USER nobody
+USER appuser
 
 # Command to run
-ENTRYPOINT ["/main"]
+ENTRYPOINT ["/app"]
 
 # ROM golang:1.16 AS builder
 
