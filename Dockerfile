@@ -37,7 +37,9 @@ ENV CUSTOM_MESSAGE="This is a custom message"
 
 EXPOSE 8080
 
-USER appuser
+RUN groupadd -g 2000 go \
+&& useradd -m -u 2001 -g go go
+USER go
 
 # Command to run
 ENTRYPOINT ["/app"]
